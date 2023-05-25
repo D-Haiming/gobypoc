@@ -1,2 +1,2 @@
 # gobypoc
-this repository 
+This repository comes from an Internet collection
